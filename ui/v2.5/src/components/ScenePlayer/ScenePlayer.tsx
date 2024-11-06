@@ -703,6 +703,7 @@ export const ScenePlayer: React.FC<IScenePlayerProps> = ({
       markers.addMarker({
         title: getMarkerTitle(marker),
         time: marker.seconds,
+        endtime: marker.
       });
     }
 
