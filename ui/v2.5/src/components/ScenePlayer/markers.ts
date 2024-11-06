@@ -54,9 +54,7 @@ class MarkersPlugin extends videojs.getPlugin("plugin") {
             markerDiv.style.width = `${
               ((marker.endtime - marker.time) / duration) * 100
             }%`;
-            markerDiv.style.left = `${
-              (marker.time / duration) * 100
-            }%`;
+            markerDiv.style.left = `${(marker.time / duration) * 100}%`;
             markerDiv.classList.add("vjs-chapter");
           } else {
             // marker is 6px wide - adjust by 3px to align to center not left side
@@ -64,7 +62,7 @@ class MarkersPlugin extends videojs.getPlugin("plugin") {
               (marker.time / duration) * 100
             }% - 3px)`;
           }
-          
+
           markerDiv.style.visibility = "visible";
         }
         if (seekBar) seekBar.appendChild(markerDiv);
@@ -100,9 +98,7 @@ class MarkersPlugin extends videojs.getPlugin("plugin") {
         markerDiv.style.width = `${
           ((marker.endtime - marker.time) / duration) * 100
         }%`;
-        markerDiv.style.left = `${
-          (marker.time / duration) * 100
-        }%`;
+        markerDiv.style.left = `${(marker.time / duration) * 100}%`;
         markerDiv.classList.add("vjs-chapter");
       } else {
         // marker is 6px wide - adjust by 3px to align to center not left side
