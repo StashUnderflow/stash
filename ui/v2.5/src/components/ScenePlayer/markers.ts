@@ -63,6 +63,7 @@ class MarkersPlugin extends videojs.getPlugin("plugin") {
             }% - 3px)`;
           }
 
+          markerDiv.dataset.markerTitle = marker.title;
           markerDiv.style.visibility = "visible";
         }
         if (seekBar) seekBar.appendChild(markerDiv);
@@ -104,6 +105,8 @@ class MarkersPlugin extends videojs.getPlugin("plugin") {
         // marker is 6px wide - adjust by 3px to align to center not left side
         markerDiv.style.left = `calc(${(marker.time / duration) * 100}% - 3px)`;
       }
+
+      markerDiv.dataset.markerTitle = marker.title;
       markerDiv.style.visibility = "visible";
     }
 
