@@ -3,6 +3,7 @@ import videojs, { VideoJsPlayer } from "video.js";
 interface IMarker {
   title: string;
   time: number;
+  endtime: number | null;
 }
 
 interface IMarkersOptions {
@@ -49,10 +50,20 @@ class MarkersPlugin extends videojs.getPlugin("plugin") {
         const markerDiv = this.markerDivs[i];
 
         if (duration) {
-          // marker is 6px wide - adjust by 3px to align to center not left side
-          markerDiv.style.left = `calc(${
-            (marker.time / duration) * 100
-          }% - 3px)`;
+          if (marker.endtime !== null) {
+            markerDiv.style.width = `${
+              ((marker.endtime - marker.time) / duration) * 100
+            }%`;
+            markerDiv.style.left = `${(marker.time / duration) * 100}%`;
+            markerDiv.classList.add("vjs-chapter");
+          } else {
+            // marker is 6px wide - adjust by 3px to align to center not left side
+            markerDiv.style.left = `calc(${
+              (marker.time / duration) * 100
+            }% - 3px)`;
+          }
+
+          markerDiv.dataset.markerTitle = marker.title;
           markerDiv.style.visibility = "visible";
         }
         if (seekBar) seekBar.appendChild(markerDiv);
@@ -84,8 +95,18 @@ class MarkersPlugin extends videojs.getPlugin("plugin") {
 
     const duration = this.player.duration();
     if (duration) {
-      // marker is 6px wide - adjust by 3px to align to center not left side
-      markerDiv.style.left = `calc(${(marker.time / duration) * 100}% - 3px)`;
+      if (marker.endtime !== null) {
+        markerDiv.style.width = `${
+          ((marker.endtime - marker.time) / duration) * 100
+        }%`;
+        markerDiv.style.left = `${(marker.time / duration) * 100}%`;
+        markerDiv.classList.add("vjs-chapter");
+      } else {
+        // marker is 6px wide - adjust by 3px to align to center not left side
+        markerDiv.style.left = `calc(${(marker.time / duration) * 100}% - 3px)`;
+      }
+
+      markerDiv.dataset.markerTitle = marker.title;
       markerDiv.style.visibility = "visible";
     }
 
